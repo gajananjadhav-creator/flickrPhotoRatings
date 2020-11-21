@@ -1,0 +1,16 @@
+
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 p-3" *ngFor="let image of images" >
+      <div class="card">
+        <a routerLink="review" (click)="sendImageDetail(image.id)">
+          <img src="{{image.url}}" title="{{image.title}}">
+          <div>
+            <li>Rating is: {{imageRating}}</li>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
