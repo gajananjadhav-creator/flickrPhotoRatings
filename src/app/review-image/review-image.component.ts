@@ -36,5 +36,12 @@ export class ReviewImageComponent implements OnInit {
    this.router.navigate(['/'],{
      queryParams:{rating:this.rating,imageId:this.imageDetail.id}
    });
+for(let i = 0; i< this.flickrService.urlArr.length; i++){
+  if(this.flickrService.urlArr[i].id==this.imageDetail.id){
+    this.flickrService.urlArr[i].rating = this.rating;
+  }
+
+}
+   
   }
 }

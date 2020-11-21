@@ -7,4 +7,5 @@ export interface FlickrPhoto{
     photos:{
       photo:FlickrPhoto[];
     };
+    rating: any;
   }

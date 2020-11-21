@@ -26,7 +26,9 @@ export class FlickrAPIService implements OnInit{
 
     private availableImages=new BehaviorSubject<any[]>([]);
   
-  constructor(private http:HttpClient,private activatedRoute:ActivatedRoute) { }
+  constructor(private http:HttpClient,private activatedRoute:ActivatedRoute) {
+    this.urlArr = [];
+   }
 
   ngOnInit(){
 
@@ -39,17 +41,25 @@ export class FlickrAPIService implements OnInit{
   loadFoodImages(){
     
     return this.http.get(this.url+this.params).pipe(map((res:FlickrPhoto)=>{
-      res.photos.photo.forEach((ph:FlickrPhoto)=>{
-        const photoObj={
-          url:`https://live.staticflickr.com/${ph.server}/${ph.id}_${ph.secret}.jpg`,
-          title:ph.title,
-          id:ph.id,
-          farm:ph.server,
-          secret:ph.secret
-        };
-        this.urlArr.push(photoObj);
-      });
-      return this.urlArr;
+      
+      if(this.urlArr.length==0){  
+        res.photos.photo.forEach((ph:FlickrPhoto)=>{
+          const photoObj={
+            url:`https://live.staticflickr.com/${ph.server}/${ph.id}_${ph.secret}.jpg`,
+            title:ph.title,
+            id:ph.id,
+            farm:ph.server,
+            secret:ph.secret,
+            rating:''
+          };
+          this.urlArr.push(photoObj);
+        });
+        return this.urlArr;
+      }
+      else {
+        return this.urlArr;
+
+      }
     }));
   }
 
